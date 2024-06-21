@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>To-Do List</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+  }
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  h2 {
+    text-align: center;
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  li {
+    padding: 10px 20px;
+    background: #fff;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    box-shadow: 0 2px 2px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .add-item {
+    margin-top: 20px;
+  }
+  input[type="text"] {
+    padding: 10px;
+    width: 70%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  button:hover {
+    background-color: #45a049;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h2>To-Do List</h2>
+  <ul id="todo-list">
+    <!-- To-Do items will be added dynamically here -->
+  </ul>
+  <div class="add-item">
+    <input type="text" id="new-item" placeholder="Add new item...">
+    <button onclick="addItem()">Add</button>
+  </div>
+</div>
+
+<script>
+  var itemId = 1; // Initialize a counter for item numbering
+
+  function addItem() {
+    var input = document.getElementById("new-item");
+    var itemText = input.value;
+    if (itemText.trim() !== "") {
+      var ul = document.getElementById("todo-list");
+      var li = document.createElement("li");
+      li.textContent = itemId + ". " + itemText; // Add item number
+      var deleteButton = document.createElement("button");
+      deleteButton.textContent = "Delete";
+      deleteButton.className = "delete-btn";
+      deleteButton.onclick = function() {
+        ul.removeChild(li);
+      };
+      li.appendChild(deleteButton);
+      ul.appendChild(li);
+      input.value = "";
+      itemId++; // Increment item counter
+    } else {
+      alert("Please enter a valid task!");
+    }
+  }
+</script>
+
+</body>
+</html>
